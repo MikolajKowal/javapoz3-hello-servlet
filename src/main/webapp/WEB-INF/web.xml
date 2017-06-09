@@ -25,6 +25,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>TodoServlet</servlet-name>
-        <url-pattern>/todo</url-pattern>
+        <url-pattern>/todo/*</url-pattern>
     </servlet-mapping>
 </web-app>

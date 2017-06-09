@@ -15,20 +15,22 @@ public class TodoServlet extends HttpServlet {
 
     private TodoView todoView;
 
+    // instalacja łańcucha:
+    private TodoChain todoChain;
+
     @Override
     public void init() throws ServletException {
         todoDao = new TodoDaoMock();
         todoView = new TodoViewHtml();
+        todoChain = new TodoChain(todoView, todoDao);
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter writer = resp.getWriter();
         resp.setContentType("text/html");
-        List<TodoModel> allTodos = todoDao.getAllTodos();
-        String todosView = todoView.show(allTodos);
-//        System.out.println(todosView);    - wypisywanie widoku Todosów do logów
-        writer.println(todosView);
+        writer.println(todoChain.invoke(req.getPathInfo()));
 
     }
 }
