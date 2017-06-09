@@ -18,8 +18,8 @@ public class TodoViewHtml implements TodoView {
 
         // opcja z lambdą / wymienna z for-em
 //        todos.stream()
-//                .map(e -> show(e))     // map = zamienia
-//                .forEach(e -> stringBuilder.append(e));
+//                .map(e -> show(e))     // map = konwersja e, który najpierw jest obiektem klasy TodoModel na Stringa
+//                .forEach(e -> stringBuilder.append(e));  // otrzymanego Stringa ładujemy do kolejnego Stringa
 
     }
 

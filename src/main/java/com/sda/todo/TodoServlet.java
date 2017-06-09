@@ -13,9 +13,12 @@ public class TodoServlet extends HttpServlet {
 
     private TodoDao todoDao;
 
+    private TodoView todoView;
+
     @Override
     public void init() throws ServletException {
         todoDao = new TodoDaoMock();
+        todoView = new TodoViewHtml();
     }
 
     @Override
@@ -23,19 +26,9 @@ public class TodoServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         resp.setContentType("text/html");
         List<TodoModel> allTodos = todoDao.getAllTodos();
-        writer.println("<ul>");
-        for (TodoModel model : allTodos){
-          writer.println("<li>");
-          writer.println("<h3>" + model.getDate().toString() + "</h3>");
-          writer.println("<h1>" + model.getName() + "</h1>");
-          writer.println("<p>" + model.getDescription() + "</p>");
-          writer.print("<p>");
-            for (int i = 0; i < model.getPriority(); i++) {
-                writer.print("X");
-            }
-            writer.println("</p>");
-          writer.println("</li>");
-        }
-        writer.println("</ul>");
+        String todosView = todoView.show(allTodos);
+//        System.out.println(todosView);    - wypisywanie widoku Todosów do logów
+        writer.println(todosView);
+
     }
 }
