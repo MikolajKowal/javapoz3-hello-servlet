@@ -1,5 +1,8 @@
 package com.sda.todo;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class AddTodoChainElement implements TodoChainElement {
 
 private String path;
@@ -20,7 +23,14 @@ private TodoView todoView;
     }
 
     @Override
-    public String action() {
-        return todoView.showAddForm();
+    public String action(HttpServletRequest req, HttpServletResponse resp) {
+        String valueToReturn = "<h1>OK</h1>";
+        if ( TodoUtil.isWriteRequest(req)){
+            TodoModel todoModel = TodoMapper.map(req);
+            todoDao.addTodo(todoModel);
+        } else {
+            valueToReturn = todoView.showAddForm();
+        }
+        return valueToReturn;
     }
 }
