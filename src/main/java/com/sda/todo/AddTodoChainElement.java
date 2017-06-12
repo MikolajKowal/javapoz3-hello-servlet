@@ -28,6 +28,8 @@ private TodoView todoView;
         if ( TodoUtil.isWriteRequest(req)){
             TodoModel todoModel = TodoMapper.map(req);
             todoDao.addTodo(todoModel);
+            resp.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY); // ustawiamy status kod 301 - "przekierowano"
+            resp.setHeader("Location", "/hello-servlets-1.0-SNAPSHOT/todo/all");
         } else {
             valueToReturn = todoView.showAddForm();
         }
