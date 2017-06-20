@@ -9,6 +9,8 @@ public class TodoViewHtml implements TodoView {
 
         // opcja z "for-em"
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<a href=\"/hello-servlets-1.0-SNAPSHOT/todo/all\"><strong>All</strong></a></br>");
+        stringBuilder.append("<a href=\"/hello-servlets-1.0-SNAPSHOT/todo/add\"><em>Add</em></a>");
         stringBuilder.append("<ol>");
         for (TodoModel todo : todos) {
             stringBuilder.append(show(todo));
@@ -27,6 +29,7 @@ public class TodoViewHtml implements TodoView {
     @Override
     public String show(TodoModel model) {
         StringBuilder stringBuilder = new StringBuilder();
+
         stringBuilder.append("<li\n");
         stringBuilder.append("<h3>" + model.getDate().toString() + "</h3>\n");
         stringBuilder.append("<h1>" + model.getName() + "</h1>\n");
