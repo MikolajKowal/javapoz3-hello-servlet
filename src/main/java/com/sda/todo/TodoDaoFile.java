@@ -33,7 +33,7 @@ public class TodoDaoFile implements TodoDao {
     }
 
     @Override
-    public void addTodo(TodoModel todoModel) {   // addTodoChainElement wywołuje tą metodę 
+    public void addTodo(TodoModel todoModel) {   // addTodoChainElement wywołuje tą metodę
        try (OutputStream outputStream = new FileOutputStream(servletContext.getResource(path).getFile(), true);
        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
        BufferedWriter writer = new BufferedWriter(outputStreamWriter)){
