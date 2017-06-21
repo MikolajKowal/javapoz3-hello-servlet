@@ -1,26 +1,34 @@
-package com.sda.sockets;
+package com.sda.homework;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
 
+    /**
+     * łączy się do serwera
+     * wysyła 5 liczb
+     * czeka na wynik
+     * wyświetla
+     */
+
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 1234);
-        // podłączamy się do istniejącego gniazdka 1234, pod hostem localhost
+
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         Scanner scanner = new Scanner(socket.getInputStream());  // zczytujemy to co do nas przychodzi
-        Scanner scannerToUser = new Scanner(System.in);
-        boolean flag = true;
-        while (flag) {
-            writer.write(scannerToUser.nextLine() + "\n");  // wypisujemy na zewnątrz
+        Scanner scannerFromUser = new Scanner(System.in);
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Insert number: ");
+            String number = scannerFromUser.nextLine();
+            writer.write(number + "\n");
             writer.flush();
-            System.out.println("Guest: " + scanner.nextLine());  // czekamy na to, co ktoś wpisze
         }
+        String result = scanner.nextLine();
+        System.out.println("Result is: " + result);
 
         socket.close();
     }

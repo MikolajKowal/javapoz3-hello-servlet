@@ -23,7 +23,7 @@ public class Server {
         while (flag) {
             String input = scanner.nextLine();   // czytamy wejście
             System.out.println("Guest: " + input);
-            writer.write(scannerToUser.nextLine() + "\n");   
+            writer.write(scannerToUser.nextLine() + "\n");
             writer.flush();   // wysyłamy
         }
         socket.close();       // zamykamy strumienie
